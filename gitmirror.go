@@ -192,6 +192,7 @@ func createRepo(w http.ResponseWriter, section string,
 			Owner   interface{}
 			Private bool
 			Name    string
+			Full_name string
 		}
 	}{}
 
@@ -210,11 +211,11 @@ func createRepo(w http.ResponseWriter, section string,
 		ownerName = fmt.Sprintf("%v", i["name"])
 	}
 
-	repo := fmt.Sprintf("git://github.com/%v/%v.git",
-		ownerName, p.Repository.Name)
+	repo := fmt.Sprintf("git://github.com/%s.git",
+		p.Repository.Full_name)
 	if p.Repository.Private {
-		repo = fmt.Sprintf("git@github.com:%v/%v.git",
-			ownerName, p.Repository.Name)
+		repo = fmt.Sprintf("git@github.com:%s.git",
+			p.Repository.Full_name)
 	}
 
 	cmds := []*exec.Cmd{
