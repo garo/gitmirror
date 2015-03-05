@@ -203,14 +203,6 @@ func createRepo(w http.ResponseWriter, section string,
 		return
 	}
 
-	var ownerName string
-	switch i := p.Repository.Owner.(type) {
-	case string:
-		ownerName = i
-	case map[string]interface{}:
-		ownerName = fmt.Sprintf("%v", i["name"])
-	}
-
 	repo := fmt.Sprintf("git://github.com/%s.git",
 		p.Repository.Full_name)
 	if p.Repository.Private {
